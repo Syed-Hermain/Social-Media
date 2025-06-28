@@ -39,6 +39,16 @@ const initialTweets: Tweet[] = [
     content: "Loving the dark mode UI. Great job team! 🌙",
     createdAt: new Date(Date.now() - 1000 * 60 * 30),
   },
+  {
+    id: 3,
+    user: {
+      name: "Charlie Brown",
+      avatar: "https://randomuser.me/api/portraits/men/33.jpg",
+      username: "charliebrown",
+    },
+    content: "Just had the best coffee ever! ☕️",
+    createdAt: new Date(Date.now() - 1000 * 60 * 10),
+  },
 ];
 
 function formatTime(date: Date) {
