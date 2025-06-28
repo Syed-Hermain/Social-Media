@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-
+import TweetBox from "@/components/tweetbox";
 type Tweet = {
     id: number;
     user: {
@@ -11,6 +9,7 @@ type Tweet = {
         avatar: string;
         username: string;
     };
+    image?: string | null;
     content: string;
     createdAt: string;
 };
@@ -23,6 +22,7 @@ const initialTweets: Tweet[] = [
             avatar: "https://randomuser.me/api/portraits/women/44.jpg",
             username: "alicej",
         },
+        image: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         content: "Excited to join this new social media platform! 🚀",
         createdAt: new Date(Date.now() - 1000 * 60 * 60).toISOString(),
     },
@@ -33,6 +33,7 @@ const initialTweets: Tweet[] = [
             avatar: "https://randomuser.me/api/portraits/men/32.jpg",
             username: "bobsmith",
         },
+        image: null,
         content: "Loving the dark mode UI. Great job team! 🌙",
         createdAt: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
     },
@@ -43,6 +44,7 @@ const initialTweets: Tweet[] = [
             avatar: "https://randomuser.me/api/portraits/men/33.jpg",
             username: "charliebrown",
         },
+        image: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
         content: "Just had the best coffee ever! ☕️",
         createdAt: new Date(Date.now() - 1000 * 60 * 10).toISOString(),
     },
@@ -60,51 +62,57 @@ function formatTime(dateString: string) {
 function Home() {
     const [tweets, setTweets] = useState<Tweet[]>(initialTweets);
     const [tweetContent, setTweetContent] = useState("");
+    const [tweetImage, setTweetImage] = useState<File | null>(null);
+
 
     const handlePost = () => {
         if (!tweetContent.trim()) return;
-        const newTweet: Tweet = {
-            id: Date.now(),
-            user: {
-                name: "You",
-                avatar: "https://randomuser.me/api/portraits/lego/1.jpg",
-                username: "you",
-            },
-            content: tweetContent,
-            createdAt: new Date().toISOString(),
-        };
-        setTweets([newTweet, ...tweets]);
-        setTweetContent("");
+        if (tweetImage) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const newTweet: Tweet = {
+                    id: Date.now(),
+                    user: {
+                        name: "You",
+                        avatar: "https://randomuser.me/api/portraits/lego/1.jpg",
+                        username: "you",
+                    },
+                    content: tweetContent,
+                    image: reader.result as string,
+                    createdAt: new Date().toISOString(),
+                };
+                setTweets([newTweet, ...tweets]);
+                setTweetContent("");
+                setTweetImage(null);
+            };
+            reader.readAsDataURL(tweetImage);
+        } else {
+            const newTweet: Tweet = {
+                id: Date.now(),
+                user: {
+                    name: "You",
+                    avatar: "https://randomuser.me/api/portraits/lego/1.jpg",
+                    username: "you",
+                },
+                content: tweetContent,
+                image: null,
+                createdAt: new Date().toISOString(),
+            };
+            setTweets([newTweet, ...tweets]);
+            setTweetContent("");
+            setTweetImage(null);
+        }
     };
 
     return (
         <div className="max-w-xl mx-auto py-8 px-2">
-            <Card className="mb-6 shadow-lg">
-                <CardHeader>
-                    <div className="flex items-center gap-3">
-                        <Avatar>
-                            <AvatarImage src="https://randomuser.me/api/portraits/lego/1.jpg" />
-                            <AvatarFallback>U</AvatarFallback>
-                        </Avatar>
-                        <span className="font-semibold">What's on your mind?</span>
-                    </div>
-                </CardHeader>
-                <CardContent>
-                    <Textarea
-                        placeholder="Write your tweet..."
-                        value={tweetContent}
-                        onChange={(e) => setTweetContent(e.target.value)}
-                        className="resize-none"
-                        rows={3}
-                        maxLength={280}
-                    />
-                </CardContent>
-                <CardFooter className="flex justify-end">
-                    <Button onClick={handlePost} disabled={!tweetContent.trim()}>
-                        Post
-                    </Button>
-                </CardFooter>
-            </Card>
+            <TweetBox
+                tweetContent={tweetContent}
+                setTweetContent={setTweetContent}
+                handlePost={handlePost}
+                tweetImage={tweetImage} // Placeholder, implement image handling if needed
+                setTweetImage={setTweetImage} // 
+            />
             <div className="space-y-4">
                 {tweets.map((tweet) => (
                     <Card key={tweet.id} className="shadow-md">
@@ -124,6 +132,14 @@ function Home() {
                         </CardHeader>
                         <CardContent>
                             <p className="text-base">{tweet.content}</p>
+                            {tweet.image && (
+                                <img
+                                    src={tweet.image}
+                                    alt="Tweet image"
+                                    className="mt-2 rounded-md border border-gray-200 w-full max-w-xs mx-auto object-cover"
+                                    style={{ aspectRatio: "3/4", maxHeight: "400px" }}
+                                />
+                            )}
                         </CardContent>
                     </Card>
                 ))}
