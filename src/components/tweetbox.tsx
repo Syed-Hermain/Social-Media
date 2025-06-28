@@ -74,20 +74,23 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                                 "bg-background"
                             )}
                         >
-                            <DialogHeader className={cn(
-                                "flex flex-row items-center justify-between px-4 pt-4 pb-2",
-                                "border-b"
-                            )}>
+                            <DialogHeader
+                                className={cn(
+                                    "flex flex-row items-center justify-between px-4 pt-4 pb-2 border-b"
+                                )}
+                            >
+                                {/*}
                                 <DialogClose asChild>
                                     <button
                                         className={cn("text-primary text-2xl font-bold")}
                                         aria-label="Close"
                                     >
-                                        ×
+                                        
                                     </button>
-                                </DialogClose>
-                                <span className="font-semibold text-lg">Tweet</span>
-                                <span className="w-6" /> {/* Spacer */}
+                                </DialogClose> */}
+                                <span className="font-semibold text-lg flex-1 text-center -ml-8">Tweet</span>
+                                {/* Empty div to balance flex for centering */}
+                                <div style={{ width: 32 }} />
                             </DialogHeader>
                             <div className="flex-1 overflow-auto">
                                 <div className="flex items-start px-4 pt-4">
