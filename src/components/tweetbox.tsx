@@ -58,18 +58,29 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
             {isMobile && (
                 <>
                     <button
-                        className="fixed bottom-6 right-6 z-50 bg-twitter-blue hover:bg-twitter-blue/90 text-white rounded-full p-4 shadow-lg flex items-center justify-center"
+                        className={cn(
+                            "fixed bottom-6 right-6 z-50 rounded-full p-4 shadow-lg flex items-center justify-center",
+                            "bg-primary text-primary-foreground hover:bg-primary/90"
+                        )}
                         onClick={() => setMobileOpen(true)}
                         aria-label="Compose Tweet"
                     >
                         <FiFeather size={24} />
                     </button>
                     <Dialog open={mobileOpen} onOpenChange={setMobileOpen}>
-                        <DialogContent className="p-0 max-w-full w-full rounded-none h-full flex flex-col justify-between bg-white">
-                            <DialogHeader className="flex flex-row items-center justify-between px-4 pt-4 pb-2 border-b border-gray-200">
+                        <DialogContent
+                            className={cn(
+                                "p-0 max-w-full w-full rounded-none h-full flex flex-col justify-between",
+                                "bg-background"
+                            )}
+                        >
+                            <DialogHeader className={cn(
+                                "flex flex-row items-center justify-between px-4 pt-4 pb-2",
+                                "border-b"
+                            )}>
                                 <DialogClose asChild>
                                     <button
-                                        className="text-twitter-blue text-2xl font-bold"
+                                        className={cn("text-primary text-2xl font-bold")}
                                         aria-label="Close"
                                     >
                                         ×
@@ -88,7 +99,10 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                                         placeholder="What is happening?!"
                                         value={tweetContent}
                                         onChange={(e) => setTweetContent(e.target.value)}
-                                        className="ml-3 resize-none border-none shadow-none focus:ring-0 text-lg placeholder:text-gray-500 bg-transparent"
+                                        className={cn(
+                                            "ml-3 resize-none border-none shadow-none focus:ring-0 text-lg",
+                                            "placeholder:text-muted-foreground bg-transparent"
+                                        )}
                                         rows={4}
                                         maxLength={280}
                                         autoFocus
@@ -99,7 +113,10 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                                         <img
                                             src={imagePreview}
                                             alt="preview"
-                                            className="rounded-2xl border border-gray-200 max-h-60 max-w-full object-cover"
+                                            className={cn(
+                                                "rounded-2xl border max-h-60 max-w-full object-cover",
+                                                "border-muted"
+                                            )}
                                         />
                                     </div>
                                 )}
@@ -109,8 +126,11 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                                     </div>
                                 )}
                             </div>
-                            <CardFooter className="flex items-center justify-between px-4 py-3 border-t border-gray-200">
-                                <div className="flex items-center gap-4 text-twitter-blue">
+                            <CardFooter className={cn(
+                                "flex items-center justify-between px-4 py-3 border-t",
+                                "border-muted"
+                            )}>
+                                <div className={cn("flex items-center gap-4 text-primary")}>
                                     <label className="cursor-pointer" htmlFor="img-upload">
                                         <FiImage size={22} />
                                     </label>
@@ -130,7 +150,11 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                                     </button>
                                 </div>
                                 <Button
-                                    className=""
+                                    className={cn(
+                                        "font-bold rounded-full px-6 py-2 transition-colors",
+                                        "bg-primary text-primary-foreground hover:bg-primary/90",
+                                        "disabled:opacity-60"
+                                    )}
                                     onClick={() => {
                                         handlePost()
                                         setRawImage(null)
@@ -149,7 +173,10 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
             )}
             {/* Desktop version */}
             {!isMobile && (
-                <Card className="mb-6 shadow-none border-b border-gray-200 bg-white rounded-none">
+                <Card className={cn(
+                    "mb-6 shadow-none border-b bg-background rounded-none",
+                    "border-muted"
+                )}>
                     <div className="flex items-start px-4 pt-4">
                         <Avatar className="w-12 h-12">
                             <AvatarImage src="https://randomuser.me/api/portraits/lego/1.jpg" />
@@ -159,7 +186,10 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                             placeholder="What is happening?!"
                             value={tweetContent}
                             onChange={(e) => setTweetContent(e.target.value)}
-                            className="ml-3 resize-none border-none shadow-none focus:ring-0 text-xl placeholder:text-gray-500 bg-transparent"
+                            className={cn(
+                                "ml-3 resize-none border-none shadow-none focus:ring-0 text-xl",
+                                "placeholder:text-muted-foreground bg-transparent"
+                            )}
                             rows={4}
                             maxLength={280}
                         />
@@ -169,7 +199,10 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                             <img
                                 src={imagePreview}
                                 alt="preview"
-                                className="rounded-2xl border border-gray-200 max-h-72 max-w-full object-cover"
+                                className={cn(
+                                    "rounded-2xl border max-h-72 max-w-full object-cover",
+                                    "border-muted"
+                                )}
                             />
                         </div>
                     )}
@@ -178,8 +211,10 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                             <Picker onEmojiClick={handleEmojiClick} />
                         </div>
                     )}
-                    <CardFooter className="flex items-center justify-between px-16 py-3">
-                        <div className="flex items-center gap-4 text-twitter-blue">
+                    <CardFooter className={cn(
+                        "flex items-center justify-between px-16 py-3"
+                    )}>
+                        <div className={cn("flex items-center gap-4 text-primary")}>
                             <label className="cursor-pointer" htmlFor="img-upload-desktop">
                                 <FiImage size={22} />
                             </label>
@@ -200,8 +235,8 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                         </div>
                         <Button
                             className={cn(
-                                "bg-twitter-blue text-white font-bold rounded-full px-6 py-2 transition-colors",
-                                "hover:bg-twitter-blue/90",
+                                "bg-primary text-primary-foreground font-bold rounded-full px-6 py-2 transition-colors",
+                                "hover:bg-primary/90",
                                 "disabled:opacity-60"
                             )}
                             onClick={() => {
