@@ -59,7 +59,7 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                 <>
                     <button
                         className={cn(
-                            "fixed bottom-6 right-6 z-50 rounded-full p-4 shadow-lg flex items-center justify-center",
+                            "fixed bottom-15 right-6 z-50 rounded-full p-4 shadow-lg flex items-center justify-center",
                             "bg-primary text-primary-foreground hover:bg-primary/90"
                         )}
                         onClick={() => setMobileOpen(true)}
