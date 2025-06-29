@@ -44,7 +44,7 @@ const initialTweets: Tweet[] = [
             avatar: "https://randomuser.me/api/portraits/men/33.jpg",
             username: "charliebrown",
         },
-        image: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+        image: "https://i.pinimg.com/736x/4f/0e/a1/4f0ea10b5847c047a44c02f221c1130a.jpg",
         content: "Just had the best coffee ever! ☕️",
         createdAt: new Date(Date.now() - 1000 * 60 * 10).toISOString(),
     },
