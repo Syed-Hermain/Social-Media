@@ -175,7 +175,7 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                   </div>
                 )}
 
-                // Place this helper component above the TweetBox component in the same file:
+                
                 
                 {showEmojiPicker && (
                   <div
