@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import { FiFeather, FiImage, FiSmile } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 
-
 import {
   Card,
   CardHeader,
@@ -117,51 +116,47 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                   />
                 </div>
                 {/* Move the button group here, just below the textarea */}
-                <div
-                    className={cn(
-                        "flex items-center px-4 pt-2"
-                    )}
-                >
-                    <div className="flex items-center gap-3 ml-13 text-primary">
-                        <label className="cursor-pointer" htmlFor="img-upload">
-                            <FiImage size={22} />
-                        </label>
-                        <input
-                            id="img-upload"
-                            type="file"
-                            accept="image/*"
-                            className="hidden"
-                            onChange={handleImageChange}
-                        />
-                        <button
-                            type="button"
-                            ref={emojiButtonRef}
-                            onClick={() => setShowEmojiPicker((v) => !v)}
-                            className="ml-1"
-                        >
-                            <FiSmile size={22} />
-                        </button>
-                    </div>
-                    <Button
-                        className={cn(
-                            "font-bold rounded-full px-6 py-2 transition-colors ml-auto",
-                            "bg-primary text-primary-foreground hover:bg-primary/90",
-                            "disabled:opacity-60"
-                        )}
-                        onClick={() => {
-                            handlePost();
-                            setRawImage(null);
-                            setImagePreview(null);
-                            setTweetImage && setTweetImage(null);
-                            setMobileOpen(false);
-                        }}
-                        disabled={!tweetContent.trim() && !rawImage}
+                <div className={cn("flex items-center px-4 pt-2")}>
+                  <div className="flex items-center gap-3 ml-13 text-primary">
+                    <label className="cursor-pointer" htmlFor="img-upload">
+                      <FiImage size={22} />
+                    </label>
+                    <input
+                      id="img-upload"
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={handleImageChange}
+                    />
+                    <button
+                      type="button"
+                      ref={emojiButtonRef}
+                      onClick={() => setShowEmojiPicker((v) => !v)}
+                      className="ml-1"
                     >
-                        Tweet
-                    </Button>
+                      <FiSmile size={22} />
+                    </button>
+                  </div>
+                  <Button
+                    className={cn(
+                      "font-bold rounded-full px-6 py-2 transition-colors ml-auto",
+                      "bg-primary text-primary-foreground hover:bg-primary/90",
+                      "disabled:opacity-60"
+                    )}
+                    onClick={() => {
+                      handlePost();
+                      setRawImage(null);
+                      setImagePreview(null);
+                      setTweetImage && setTweetImage(null);
+                      setMobileOpen(false);
+                    }}
+                    disabled={!tweetContent.trim() && !rawImage}
+                  >
+                    Tweet
+                  </Button>
                 </div>
                 {imagePreview && (
-                  <div className="px-4 pt-2 flex items-start">
+                  <div className="px-4 pt-2 flex items-start relative">
                     {/* Spacer for alignment */}
                     <div className="w-12 sm:w-16 ml-12" />
                     <img
@@ -172,11 +167,21 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                         "border-muted"
                       )}
                     />
+                    <button
+                      type="button"
+                      className="absolute top-2 right-2 bg-black/60 rounded-full p-1 text-white hover:bg-black/80"
+                      aria-label="Remove image"
+                      onClick={() => {
+                        setRawImage(null);
+                        setImagePreview(null);
+                        setTweetImage && setTweetImage(null);
+                      }}
+                    >
+                      <FiX size={18} />
+                    </button>
                   </div>
                 )}
 
-                
-                
                 {showEmojiPicker && (
                   <div
                     ref={emojiPickerRef}
@@ -214,34 +219,34 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
               rows={4}
               maxLength={280}
             />
-            </div>
-        {imagePreview && (
+          </div>
+          {imagePreview && (
             <div className="px-16 pt-2 flex items-start">
-                <div className="relative">
-                    <img
-                        src={imagePreview}
-                        alt="preview"
-                        className={cn(
-                            "rounded-2xl border max-h-72 max-w-full object-cover",
-                            "border-muted"
-                        )}
-                    />
-                    <button
-                        type="button"
-                        className="absolute top-2 right-2 bg-black/60 rounded-full p-1 text-white hover:bg-black/80"
-                        aria-label="Remove image"
-                        onClick={() => {
-                            setRawImage(null);
-                            setImagePreview(null);
-                            setTweetImage && setTweetImage(null);
-                        }}
-                    >
-                        <FiX size={18} />
-                    </button>
-                </div>
+              <div className="relative">
+                <img
+                  src={imagePreview}
+                  alt="preview"
+                  className={cn(
+                    "rounded-2xl border max-h-72 max-w-full object-cover",
+                    "border-muted"
+                  )}
+                />
+                <button
+                  type="button"
+                  className="absolute top-2 right-2 bg-black/60 rounded-full p-1 text-white hover:bg-black/80"
+                  aria-label="Remove image"
+                  onClick={() => {
+                    setRawImage(null);
+                    setImagePreview(null);
+                    setTweetImage && setTweetImage(null);
+                  }}
+                >
+                  <FiX size={18} />
+                </button>
+              </div>
             </div>
-        )}
-        {showEmojiPicker && (
+          )}
+          {showEmojiPicker && (
             <div ref={emojiPickerRef} className="absolute left-20 z-50 mt-2">
               <Picker onEmojiClick={handleEmojiClick} />
             </div>
@@ -290,7 +295,7 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
             </div>
           </CardFooter>
         </Card>
-    )}
+      )}
     </>
   );
 };
