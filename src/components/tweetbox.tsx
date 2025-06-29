@@ -164,13 +164,13 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                   <div className="px-4 pt-2 flex items-start">
                     {/* Spacer for alignment */}
                     <div className="w-12 sm:w-16 ml-12" />
-                    <DynamicImagePreview
+                    <img
                       src={imagePreview}
-                      onRemove={() => {
-                        setRawImage(null);
-                        setImagePreview(null);
-                        setTweetImage && setTweetImage(null);
-                      }}
+                      alt="preview"
+                      className={cn(
+                        "rounded-2xl border max-h-72 max-w-full object-cover",
+                        "border-muted"
+                      )}
                     />
                   </div>
                 )}
