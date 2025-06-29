@@ -136,8 +136,8 @@ function Home() {
                                 <img
                                     src={tweet.image}
                                     alt="Tweet image"
-                                    className="mt-2 rounded-md border border-gray-200 w-full max-w-xs mx-auto object-cover"
-                                    style={{ aspectRatio: "3/4", maxHeight: "400px" }}
+                                    className="mt-2 rounded-md border border-gray-200 w-full mx-auto object-contain"
+                                    style={{ maxHeight: "400px", height: "auto", width: "100%" }}
                                 />
                             )}
                         </CardContent>

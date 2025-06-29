@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import { FiFeather, FiImage, FiSmile } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
+
+
 import {
   Card,
   CardHeader,
@@ -159,33 +161,22 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                     </Button>
                 </div>
                 {imagePreview && (
-                    <div className="px-4 pt-2 flex items-start">
-                        {/* Spacer for alignment */}
-                        <div className="w-12 sm:w-16 ml-12" />
-                        <div className="relative">
-                            <img
-                                src={imagePreview}
-                                alt="preview"
-                                className={cn(
-                                    "rounded-2xl border max-h-72 max-w-full object-cover",
-                                    "border-muted"
-                                )}
-                            />
-                            <button
-                                type="button"
-                                className="absolute top-2 right-2 bg-black/60 rounded-full p-1 text-white hover:bg-black/80"
-                                aria-label="Remove image"
-                                onClick={() => {
-                                    setRawImage(null);
-                                    setImagePreview(null);
-                                    setTweetImage && setTweetImage(null);
-                                }}
-                            >
-                                <FiX size={18} />
-                            </button>
-                        </div>
-                    </div>
+                  <div className="px-4 pt-2 flex items-start">
+                    {/* Spacer for alignment */}
+                    <div className="w-12 sm:w-16 ml-12" />
+                    <DynamicImagePreview
+                      src={imagePreview}
+                      onRemove={() => {
+                        setRawImage(null);
+                        setImagePreview(null);
+                        setTweetImage && setTweetImage(null);
+                      }}
+                    />
+                  </div>
                 )}
+
+                // Place this helper component above the TweetBox component in the same file:
+                
                 {showEmojiPicker && (
                   <div
                     ref={emojiPickerRef}
