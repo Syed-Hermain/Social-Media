@@ -78,7 +78,7 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
           >
             <FiFeather size={24} />
           </button>
-            <Dialog open={mobileOpen} onOpenChange={setMobileOpen}>
+          <Dialog open={mobileOpen} onOpenChange={setMobileOpen}>
             <DialogContent
               className={cn(
                 "p-0 max-w-full w-full rounded-none h-full flex flex-col justify-between",
@@ -93,7 +93,7 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                 {/* Close button or left spacer */}
                 <div style={{ width: 32 }} />
                 {/* Centered Tweet text */}
-                <span className="font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
+                <span className="font-semibold text-lg absolute left-[46%] transform -translate-x-1/2">
                   Tweet
                 </span>
                 {/* Tweet button on the right */}
@@ -118,21 +118,21 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
               <div className="flex-1 overflow-auto">
                 <div className="flex items-start px-4 pt-4">
                   <Avatar className="w-10 h-10">
-                  <AvatarImage src="https://randomuser.me/api/portraits/lego/1.jpg" />
-                  <AvatarFallback>U</AvatarFallback>
+                    <AvatarImage src="https://randomuser.me/api/portraits/lego/1.jpg" />
+                    <AvatarFallback>U</AvatarFallback>
                   </Avatar>
                   <Textarea
-                  placeholder="What is happening?!"
-                  value={tweetContent}
-                  onChange={(e) => setTweetContent(e.target.value)}
-                  className={cn(
-                    "ml-3 resize-none border-none shadow-none focus:ring-0 text-lg",
-                    "placeholder:text-muted-foreground bg-transparent",
-                    "outline-none focus:outline-none" // Ensure no border or outline
-                  )}
-                  rows={4}
-                  maxLength={280}
-                  autoFocus
+                    placeholder="What is happening?!"
+                    value={tweetContent}
+                    onChange={(e) => setTweetContent(e.target.value)}
+                    className={cn(
+                      "ml-3 resize-none border-none shadow-none focus:ring-0 text-lg",
+                      "placeholder:text-muted-foreground bg-transparent",
+                      "outline-none focus:outline-none" // Ensure no border or outline
+                    )}
+                    rows={4}
+                    maxLength={280}
+                    autoFocus
                   />
                 </div>
                 {/* Move the button group here, just below the textarea */}
@@ -157,7 +157,6 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                       <FiSmile size={22} />
                     </button>
                   </div>
-                  
                 </div>
                 {imagePreview && (
                   <div className="px-4 pt-2 flex items-start relative">
