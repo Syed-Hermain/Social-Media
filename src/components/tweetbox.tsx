@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FiFeather, FiImage, FiSmile } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 
@@ -19,10 +19,9 @@ import {
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@uidotdev/usehooks";
-import { useClickOutside } from "@uidotdev/usehooks";
 import { FiX } from "react-icons/fi";
 import { useClickAway } from "react-use";
-import { useEffect } from "react";
+
 // Types
 export interface TweetBoxProps {
   tweetContent: string;
