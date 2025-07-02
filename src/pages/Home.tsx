@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import TweetBox from "@/components/tweetbox";
+import TweetBox from "@/components/TweetBox/tweetbox";
 import { LeftSidebar } from "@/components/Sidebar/LeftSidebar";
 import RightSidebar from "@/components/Sidebar/RightSidebar";
 type Tweet = {
@@ -112,7 +112,13 @@ function Home() {
   <div className="container mx-auto max-w-6xl grid grid-cols-[auto_1fr_auto] gap-x-4 py-6">
     {/* Left Sidebar */}
     <aside className="hidden sm:flex flex-col sticky top-6 h-fit w-20 lg:w-64 space-y-2 px-2">
-      <LeftSidebar/>
+      <LeftSidebar
+      tweetContent={tweetContent}
+        setTweetContent={setTweetContent}
+        tweetImage={tweetImage}
+        setTweetImage={setTweetImage}
+        handlePost={handlePost}
+      />
     </aside>
 
 

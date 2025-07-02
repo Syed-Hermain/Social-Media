@@ -13,13 +13,33 @@ import {
   DialogTitle,
 } from "../ui/dialog";
 import { Button } from "../ui/button";
+import SidebarTweet from "../TweetBox/SidebarTweet";
 
 const user = {
   name: "John Doe",
   username: "johndoe",
   avatarUrl: "https://randomuser.me/api/portraits/lego/1.jpg",
 };
-const navItems = [
+
+
+interface LeftSidebarProps {
+  tweetContent: string
+  setTweetContent: React.Dispatch<React.SetStateAction<string>>
+  tweetImage: File | null
+  setTweetImage: React.Dispatch<React.SetStateAction<File | null>>
+  handlePost: () => Promise<void>
+}
+
+
+
+export function LeftSidebar({
+  tweetContent,
+  setTweetContent,
+  tweetImage,
+  setTweetImage,
+  handlePost,
+}: LeftSidebarProps) {
+  const navItems = [
   { to: "/", label: "Home", Icon: Home },
   { to: "/search", label: "Search", Icon: Search },
   { to: "/notifications", label: "Notifications", Icon: Bell },
@@ -47,9 +67,7 @@ const navItems = [
     hideformobile: true, // Hide this item on mobile
   },
 ];
-
-export function LeftSidebar() {
-  const [DialogOpen, setDialogOpen] = useState<boolean>(false);
+  
   return (
     <>
       {/* Sidebar for desktop/tablet */}
@@ -84,48 +102,17 @@ export function LeftSidebar() {
             </NavLink>
           ))}
         </nav>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button
-              variant="secondary"
-              className="flex items-center w-full rounded-full px-4 py-3 lg:px-6"
-            >
-              <PlusIcon className="w-6 h-6 mr-3" />
-              <span className="hidden lg:inline">New Post</span>
-            </Button>
-          </DialogTrigger>
+        
 
-          <DialogContent className="max-w-lg">
-            <DialogHeader>
-              <DialogTitle>Create New Post</DialogTitle>
-              <DialogDescription>Share what’s on your mind.</DialogDescription>
-            </DialogHeader>
+        {/* */}
+          <SidebarTweet
+          tweetContent={tweetContent}
+        setTweetContent={setTweetContent}
+        tweetImage={tweetImage}
+        setTweetImage={setTweetImage}
+        handlePost={handlePost}
 
-            <textarea
-              className="w-full h-36 mt-4 p-2 border rounded-md
-                       focus:ring-2 focus:ring-blue-400"
-              placeholder="Write your post…"
-            />
-
-            <DialogFooter className="mt-6 space-x-2">
-              <Button
-                onClick={() => {
-                  /* call your submit logic */
-                }}
-              >
-                Post
-              </Button>
-              <Button
-                variant="outline"
-                onClick={() => {
-                  /* nothing—Dialog closes on outside click */
-                }}
-              >
-                Cancel
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+          />
 
         <div className="hidden lg:block pt-4 border-t border-gray-200 dark:border-gray-700">
           <ModeToggle />
