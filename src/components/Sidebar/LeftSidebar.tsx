@@ -3,16 +3,7 @@ import { Home, Search, Bell, MessageSquare, Bookmark } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { PlusIcon } from "lucide-react";
 import { useState } from "react";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogDescription,
-  DialogFooter,
-  DialogTitle,
-} from "../ui/dialog";
-import { Button } from "../ui/button";
+
 import SidebarTweet from "../TweetBox/SidebarTweet";
 
 const user = {
