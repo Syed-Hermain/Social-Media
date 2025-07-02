@@ -36,47 +36,44 @@ const navItems = [
   },
 ];
 
-export function Sidebar() {
+export function LeftSidebar() {
   return (
     <>
       {/* Sidebar for desktop/tablet */}
-      <aside
-        className="
-                    hidden sm:fixed sm:inset-y-0 sm:left-0 sm:w-20 lg:w-64
-                    sm:bg-white sm:dark:bg-gray-900
-                    sm:border-r sm:border-gray-200 sm:dark:border-gray-700
-                    sm:flex sm:flex-col sm:justify-between
-                    sm:py-6 sm:px-4
-                "
+       <aside className="
+  hidden sm:flex flex-col justify-between
+  sticky top-6 h-fit
+  w-20 lg:w-64
+  space-y-1 lg:space-y-3
+  px-2 lg:px-4 py-2 lg:py-6
+">
+  <nav className="space-y-1">
+    {navItems.map(({ to, label, Icon }) => (
+      <NavLink
+        key={to}
+        to={to}
+        className={({ isActive }) =>
+          [
+            "flex items-center w-full rounded-full transition-colors duration-150",
+            "text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800",
+            isActive &&
+              "bg-blue-100 dark:bg-blue-900 font-semibold text-blue-500",
+            "px-4 py-3 lg:px-6"
+          ]
+            .filter(Boolean)
+            .join(" ")
+        }
       >
-        <nav className="space-y-1">
-          {navItems.map(({ to, label, Icon }) => (
-            <NavLink
-              key={to}
-              to={to}
-              end
-              className={({ isActive }) =>
-                [
-                  "flex items-center px-3 py-2 rounded-md",
-                  "text-gray-700 dark:text-gray-200",
-                  "hover:bg-gray-100 dark:hover:bg-gray-800",
-                  isActive && "bg-blue-100 dark:bg-blue-900 font-semibold",
-                  "transition-colors duration-150",
-                  "justify-center lg:justify-start",
-                ]
-                  .filter(Boolean)
-                  .join(" ")
-              }
-            >
-              <Icon className="w-6 h-6 mr-0 lg:mr-3" />
-              <span className="hidden lg:inline">{label}</span>
-            </NavLink>
-          ))}
-        </nav>
-        <div className="pt-4 border-t border-gray-200 dark:border-gray-700 hidden lg:block">
-          <ModeToggle />
-        </div>
-      </aside>
+        <Icon className="w-6 h-6" />
+        <span className="hidden lg:inline ml-4">{label}</span>
+      </NavLink>
+    ))}
+  </nav>
+
+  <div className="hidden lg:block pt-4 border-t border-gray-200 dark:border-gray-700">
+    <ModeToggle />
+  </div>
+</aside>
 
       {/* Bottom nav for mobile */}
       <nav
