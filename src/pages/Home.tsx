@@ -1,73 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import TweetBox from "@/components/TweetBox/tweetbox";
 import { LeftSidebar } from "@/components/Sidebar/LeftSidebar";
 import RightSidebar from "@/components/Sidebar/RightSidebar";
-type Tweet = {
-  id: number;
-  user: {
-    name: string;
-    avatar: string;
-    username: string;
-  };
-  image?: string | null;
-  content: string;
-  createdAt: string;
-};
+import { TweetCard } from "@/TweetCard/TweetCard";
+import type { Tweet } from "@/data/types";
+import { mockTweets } from "@/data/mock-tweet";
 
-const initialTweets: Tweet[] = [
-  {
-    id: 1,
-    user: {
-      name: "Alice Johnson",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg",
-      username: "alicej",
-    },
-    image:
-      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-    content: "Excited to join this new social media platform! 🚀",
-    createdAt: new Date(Date.now() - 1000 * 60 * 60).toISOString(),
-  },
-  {
-    id: 2,
-    user: {
-      name: "Bob Smith",
-      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-      username: "bobsmith",
-    },
-    image: null,
-    content: "Loving the dark mode UI. Great job team! 🌙",
-    createdAt: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
-  },
-  {
-    id: 3,
-    user: {
-      name: "Charlie Brown",
-      avatar: "https://randomuser.me/api/portraits/men/33.jpg",
-      username: "charliebrown",
-    },
-    image:
-      "https://i.pinimg.com/736x/4f/0e/a1/4f0ea10b5847c047a44c02f221c1130a.jpg",
-    content: "Just had the best coffee ever! ☕️",
-    createdAt: new Date(Date.now() - 1000 * 60 * 10).toISOString(),
-  },
-];
-
-function formatTime(dateString: string) {
-  const date = new Date(dateString);
-  const diff = Math.floor((Date.now() - date.getTime()) / 1000);
-  if (diff < 60) return `${diff}s ago`;
-  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
-  return date.toLocaleDateString();
-}
 
 function Home() {
-  const [tweets, setTweets] = useState<Tweet[]>(initialTweets);
+  const [tweets, setTweets] = useState<Tweet[]>([]);
   const [tweetContent, setTweetContent] = useState("");
   const [tweetImage, setTweetImage] = useState<File | null>(null);
 
+  useEffect(()=>{
+    setTweets(mockTweets);
+  })
   const handlePost = () => {
     if (!tweetContent.trim()) return;
     if (tweetImage) {
@@ -136,35 +85,7 @@ function Home() {
         />
         <div className="space-y-4">
           {tweets.map((tweet) => (
-            <Card key={tweet.id} className="shadow-md">
-              <CardHeader className="flex flex-row items-center gap-3 pb-2">
-                <Avatar>
-                  <AvatarImage src={tweet.user.avatar} />
-                  <AvatarFallback>{tweet.user.name[0]}</AvatarFallback>
-                </Avatar>
-                <div>
-                  <div className="font-semibold">{tweet.user.name}</div>
-                  <div className="text-xs text-muted-foreground">
-                    @{tweet.user.username} · {formatTime(tweet.createdAt)}
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-base">{tweet.content}</p>
-                {tweet.image && (
-                  <img
-                    src={tweet.image}
-                    alt="Tweet image"
-                    className="mt-2 rounded-md border border-gray-200 w-full mx-auto object-contain"
-                    style={{
-                      maxHeight: "400px",
-                      height: "auto",
-                      width: "100%",
-                    }}
-                  />
-                )}
-              </CardContent>
-            </Card>
+            <TweetCard key={tweet.id} tweet={tweet} />
           ))}
         </div>
         </div>

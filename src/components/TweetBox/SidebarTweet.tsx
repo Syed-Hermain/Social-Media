@@ -10,6 +10,7 @@ import {
   DialogFooter,
   DialogTitle,
 } from "../ui/dialog";
+import TextareaAutosize from "react-textarea-autosize";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 interface TweetBoxProps {
@@ -95,26 +96,29 @@ export default function SidebarTweet({
               </div>
               {/* Input and Image */}
               <div className="flex-1">
-                <textarea
-                  ref={textareaRef}
-                  value={tweetContent}
-                  onChange={(e) => {
-                    if (e.target.value.length <= 250) adjustHeight(e);
-                  }}
-                  placeholder="What's happening?"
-                  maxLength={250}
-                  className="
+                <TextareaAutosize
+      value={tweetContent}
+      onChange={(e) => {
+        if (e.target.value.length <= 250) {
+          setTweetContent(e.target.value);
+        }
+      }}
+      placeholder="What's happening?"
+      maxLength={250}
+      minRows={3}            /* initial height */
+      maxRows={10}           /* prevents runaway growth */
+      className="
         w-full
         text-lg
         bg-transparent
         border-none
         outline-none
         resize-none
-        overflow-hidden
         placeholder-gray-500
       "
-                  style={{ minHeight: 80 }}
-                />
+      style={{ overflow: "hidden" }}
+    />
+
 
                 {tweetImage && (
                   <div className="relative mt-2">
