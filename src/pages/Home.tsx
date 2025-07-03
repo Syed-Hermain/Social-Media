@@ -83,7 +83,7 @@ function Home() {
           tweetImage={tweetImage} // Placeholder, implement image handling if needed
           setTweetImage={setTweetImage} //
         />
-        <div className="space-y-4">
+        <div className="space-y-0">
           {tweets.map((tweet) => (
             <TweetCard key={tweet.id} tweet={tweet} />
           ))}
