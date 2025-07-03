@@ -120,19 +120,16 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                     <AvatarImage src="https://randomuser.me/api/portraits/lego/1.jpg" />
                     <AvatarFallback>U</AvatarFallback>
                   </Avatar>
-                  <Textarea
-                    placeholder="What is happening?!"
-                    value={tweetContent}
-                    onChange={(e) => setTweetContent(e.target.value)}
-                    className={cn(
-                      "ml-3 resize-none border-none shadow-none focus:ring-0 text-lg",
-                      "placeholder:text-muted-foreground bg-transparent",
-                      "outline-none focus:outline-none" // Ensure no border or outline
-                    )}
-                    rows={4}
-                    maxLength={280}
-                    autoFocus
-                  />
+                  <textarea
+                                value={tweetContent}
+                                onChange={e => {
+                                    if (e.target.value.length <= 250) setTweetContent(e.target.value)
+                                }}
+                                placeholder="What's happening?"
+                                maxLength={250}
+                                className="w-full h-24 text-lg bg-transparent border-none outline-none resize-none placeholder-gray-500"
+                                style={{ minHeight: 80 }}
+                            />
                 </div>
                 {/* Move the button group here, just below the textarea */}
                 <div className={cn("flex items-center px-4 pt-2")}>
