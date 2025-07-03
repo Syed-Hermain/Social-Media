@@ -16,15 +16,16 @@ function Home() {
 
   useEffect(()=>{
     setTweets(mockTweets);
-  })
+  },[])
   const handlePost = () => {
     if (!tweetContent.trim()) return;
     if (tweetImage) {
       const reader = new FileReader();
       reader.onloadend = () => {
         const newTweet: Tweet = {
-          id: Date.now(),
+          id: Date.now().toString(),
           user: {
+            id: "u"+Date.now().toString(),
             name: "You",
             avatar: "https://randomuser.me/api/portraits/lego/1.jpg",
             username: "you",
@@ -40,8 +41,9 @@ function Home() {
       reader.readAsDataURL(tweetImage);
     } else {
       const newTweet: Tweet = {
-        id: Date.now(),
+        id: Date.now().toString(),
         user: {
+          id: "u"+Date.now().toString(),
           name: "You",
           avatar: "https://randomuser.me/api/portraits/lego/1.jpg",
           username: "you",
@@ -69,8 +71,6 @@ function Home() {
         handlePost={handlePost}
       />
     </aside>
-
-
       <main
         className="col-start-2"
       >
