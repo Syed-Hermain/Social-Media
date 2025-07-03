@@ -10,7 +10,8 @@ export interface Tweet {
   id: string;
   user: User;
   content: string;
-  image?: string;
+  image?: string | null
+
   createdAt: string;    // ISO string
   replies?: number;
   retweets?: number;
