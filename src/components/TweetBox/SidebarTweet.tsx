@@ -36,6 +36,16 @@ export default function SidebarTweet({
   };
   const [open, setOpen] = useState<boolean>(false);
 
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  function adjustHeight(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    const ta = textareaRef.current!;
+    // reset height so scrollHeight is recalculated properly
+    ta.style.height = "auto";
+    ta.style.height = `${ta.scrollHeight}px`;
+    setTweetContent(e.target.value);
+  }
+
   return (
     <>
       <button
@@ -86,16 +96,26 @@ export default function SidebarTweet({
               {/* Input and Image */}
               <div className="flex-1">
                 <textarea
+                  ref={textareaRef}
                   value={tweetContent}
                   onChange={(e) => {
-                    if (e.target.value.length <= 250)
-                      setTweetContent(e.target.value);
+                    if (e.target.value.length <= 250) adjustHeight(e);
                   }}
                   placeholder="What's happening?"
                   maxLength={250}
-                  className="w-full h-24 text-lg bg-transparent border-none outline-none resize-none placeholder-gray-500"
+                  className="
+        w-full
+        text-lg
+        bg-transparent
+        border-none
+        outline-none
+        resize-none
+        overflow-hidden
+        placeholder-gray-500
+      "
                   style={{ minHeight: 80 }}
                 />
+
                 {tweetImage && (
                   <div className="relative mt-2">
                     <img
