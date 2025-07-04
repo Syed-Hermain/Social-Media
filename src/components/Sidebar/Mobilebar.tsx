@@ -9,6 +9,15 @@ const navItems = [
 ];
 
 const Mobilebar: React.FC = () => (
+    <>
+        <nav className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 flex justify-between items-center h-12 px-4 z-50 md:hidden">
+            <span className="font-bold text-lg text-blue-500">MyApp</span>
+            <button className="text-gray-600 hover:text-blue-500 focus:outline-none">
+                <FiBell size={22} />
+            </button>
+        </nav>
+        <div className="h-12" />
+    
     <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center h-14 z-50 md:hidden">
         {navItems.map((item, idx) => (
             <button
@@ -20,6 +29,7 @@ const Mobilebar: React.FC = () => (
             </button>
         ))}
     </nav>
+    </>
 );
 
 export default Mobilebar;

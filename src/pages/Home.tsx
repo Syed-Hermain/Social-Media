@@ -61,7 +61,7 @@ function Home() {
   return (
     <div className="bg-background min-h-screen">
       {/* Responsive rendering: show only Mobilebar and main on mobile */}
-      <div className="container mx-auto max-w-6xl grid grid-cols-[auto_1fr_auto] gap-x-4 py-6">
+      <div className="container mx-auto max-w-6xl grid grid-cols-[auto_1fr_auto] gap-x-0 py-6">
       {/* Left Sidebar: hidden on mobile via 'sm:flex' */}
       <aside className="hidden sm:flex flex-col sticky top-6 h-fit w-20 lg:w-64 space-y-2 px-2">
         <LeftSidebar
@@ -72,8 +72,8 @@ function Home() {
         handlePost={handlePost}
         />
       </aside>
-      <main className="col-start-2 w-full">
-        <div className="max-w-2xl mx-auto space-y-4 px-4 sm:px-0">
+      <main className="col-start-0 w-full">
+        <div className="max-w-2xl mx-auto space-y-4 px-0 sm:px-0">
         <TweetBox
           tweetContent={tweetContent}
           setTweetContent={setTweetContent}
