@@ -113,15 +113,15 @@ export function LeftSidebar({
       {/* Bottom nav for mobile */}
       <nav
         className="
-                    fixed bottom-0 left-0 right-0 z-50
-                    bg-white dark:bg-gray-900
-                    border-t border-gray-200 dark:border-gray-700
-                    flex justify-around items-center
-                    py-2
-                    sm:hidden
-                "
+          block sm:hidden
+    fixed bottom-0 left-0 right-0 z-60
+    bg-red-500
+    border-t border-black
+    p-2
+
+        "
       >
-        {navItems.map(({ to, label, Icon, hideformobile }) => (
+        {navItems.map(({ to, Icon }) => (
           <NavLink
             key={to}
             to={to}
@@ -129,24 +129,20 @@ export function LeftSidebar({
             className={({ isActive }) =>
               [
                 "flex flex-col items-center justify-center px-2 py-1 rounded-md",
-                "text-gray-700 dark:text-gray-200",
-                "hover:bg-gray-100 dark:hover:bg-gray-800",
+                "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800",
                 isActive && "bg-blue-100 dark:bg-blue-900 font-semibold",
                 "transition-colors duration-150",
-
-                hideformobile ? "hidden sm:flex" : "flex",
               ]
                 .filter(Boolean)
                 .join(" ")
             }
           >
             <Icon className="w-6 h-6" />
-            {/* Optionally show label on mobile: */}
-            {/* <span className="text-xs">{label}</span> */}
           </NavLink>
         ))}
-        <ModeToggle />
       </nav>
+
+
     </>
   );
 }
