@@ -11,6 +11,12 @@ interface TweetCardProps {
 }
 
 export function TweetCard({ tweet }: TweetCardProps) {
+
+  function sanitizeTweetContent(content: string): string {
+  // Replace more than 2 consecutive blank lines with exactly 2
+  return content.replace(/(\n\s*){3,}/g, "\n\n");
+}
+
   return (
     <article className="flex p-4 border-b border-gray-200 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800">
       {/* Avatar */}
@@ -40,7 +46,7 @@ export function TweetCard({ tweet }: TweetCardProps) {
 
         {/* Text */}
         <p className="mt-1 text-gray-900 dark:text-white leading-relaxed whitespace-pre-wrap">
-          {tweet.content}
+          {sanitizeTweetContent(tweet.content)}
         </p>
 
         {/* Optional Image */}

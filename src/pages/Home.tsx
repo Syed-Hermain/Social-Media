@@ -72,7 +72,7 @@ function Home() {
         handlePost={handlePost}
         />
       </aside>
-      <main className="col-start-0 w-full">
+      <main className="col-start-0 w-full mt-5 sm:mt-0">
         <div className="max-w-2xl mx-auto space-y-4 px-0 sm:px-0">
         <TweetBox
           tweetContent={tweetContent}

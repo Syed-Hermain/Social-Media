@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FiFeather, FiImage, FiSmile } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
-
+import TextareaAutosize from "react-textarea-autosize";
 import {
   Card,
   CardHeader,
@@ -120,15 +120,17 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
                     <AvatarImage src="https://randomuser.me/api/portraits/lego/1.jpg" />
                     <AvatarFallback>U</AvatarFallback>
                   </Avatar>
-                  <textarea
+                  <TextareaAutosize
                                 value={tweetContent}
                                 onChange={e => {
                                     if (e.target.value.length <= 250) setTweetContent(e.target.value)
                                 }}
                                 placeholder="What's happening?"
                                 maxLength={250}
-                                className="w-full h-24 text-lg bg-transparent border-none outline-none resize-none placeholder-gray-500"
-                                style={{ minHeight: 80 }}
+                                minRows={3}
+                                maxRows={10}
+                                className="w-full ml-2 h-24 text-lg bg-transparent border-none outline-none resize-none placeholder-gray-500"
+                                
                             />
                 </div>
                 {/* Move the button group here, just below the textarea */}
@@ -207,17 +209,32 @@ export const TweetBox: React.FC<TweetBoxProps> = ({
               <AvatarImage src="https://randomuser.me/api/portraits/lego/1.jpg" />
               <AvatarFallback>U</AvatarFallback>
             </Avatar>
-            <Textarea
-              placeholder="What is happening?!"
-              value={tweetContent}
-              onChange={(e) => setTweetContent(e.target.value)}
-              className={cn(
-                "ml-3 resize-none border-none shadow-none focus:ring-0 text-xl",
-                "placeholder:text-muted-foreground bg-transparent"
+            
+
+            <TextareaAutosize
+                  value={tweetContent}
+                  onChange={(e) => {
+                    if (e.target.value.length <= 250) {
+                      setTweetContent(e.target.value);
+                    }
+                  }}
+                  placeholder="What's happening?"
+                  maxLength={250}
+                  minRows={3} /* initial height */
+                  maxRows={10} /* prevents runaway growth */
+                  className={cn(
+                "ml-3 resize-none border-none outline-none ring-0 focus:outline-none focus:ring-0 focus:border-transparent",
+    "text-xl placeholder:text-muted-foreground bg-transparent w-full"
               )}
-              rows={4}
-              maxLength={280}
-            />
+                  style={{ overflow: "hidden" }}
+                />
+
+
+
+
+
+
+
           </div>
           {imagePreview && (
             <div className="px-16 pt-2 flex items-start">

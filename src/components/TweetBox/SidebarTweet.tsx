@@ -97,17 +97,17 @@ export default function SidebarTweet({
               {/* Input and Image */}
               <div className="flex-1">
                 <TextareaAutosize
-      value={tweetContent}
-      onChange={(e) => {
-        if (e.target.value.length <= 250) {
-          setTweetContent(e.target.value);
-        }
-      }}
-      placeholder="What's happening?"
-      maxLength={250}
-      minRows={3}            /* initial height */
-      maxRows={10}           /* prevents runaway growth */
-      className="
+                  value={tweetContent}
+                  onChange={(e) => {
+                    if (e.target.value.length <= 250) {
+                      setTweetContent(e.target.value);
+                    }
+                  }}
+                  placeholder="What's happening?"
+                  maxLength={250}
+                  minRows={3} /* initial height */
+                  maxRows={10} /* prevents runaway growth */
+                  className="
         w-full
         text-lg
         bg-transparent
@@ -116,9 +116,8 @@ export default function SidebarTweet({
         resize-none
         placeholder-gray-500
       "
-      style={{ overflow: "hidden" }}
-    />
-
+                  style={{ overflow: "hidden" }}
+                />
 
                 {tweetImage && (
                   <div className="relative mt-2">
