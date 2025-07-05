@@ -4,14 +4,17 @@ import { FiBell, FiBookmark, FiSettings, FiUser } from "react-icons/fi";
 import { ModeToggle } from "@/components/mode-toggle"; // Use your own component if different
 import { useScrollDirection } from "@/hooks/Scrolling";
 
-const  MobileTop:React.FC=()=> {
+const MobileTop: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef(null);
-    const scrollDirection= useScrollDirection();
+  const scrollDirection = useScrollDirection();
   // Close sidebar when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (sidebarRef.current && !(sidebarRef.current as HTMLElement).contains(e.target as Node)) {
+      if (
+        sidebarRef.current &&
+        !(sidebarRef.current as HTMLElement).contains(e.target as Node)
+      ) {
         setSidebarOpen(false);
       }
     };
@@ -28,8 +31,12 @@ const  MobileTop:React.FC=()=> {
   }, [sidebarOpen]);
 
   return (
-    <div className={`fixed top-0 left-0 right-0 bg-background border-b border-gray-600 flex justify-around items-center h-14 z-50 md:hidden
-    ${scrollDirection==="down" ? "-translate-y-full":"translate-y-0"}`}>
+    <>
+    <div
+      className={`fixed top-0 left-0 right-0 bg-background border-b border-gray-600 flex justify-around items-center h-14 z-50 md:hidden
+    transform transition-transform duration-300 ease-in-out
+    ${scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"}`}
+    >
       {/* Profile + Brand */}
       <div className="flex items-center space-x-5">
         <img
@@ -38,7 +45,9 @@ const  MobileTop:React.FC=()=> {
           className="w-10 h-10 rounded-full cursor-pointer"
           onClick={() => setSidebarOpen(true)}
         />
-        <span className="font-bold text-lg text-gray-800 dark:text-gray-100">Zwitter</span>
+        <span className="font-bold text-lg text-gray-800 dark:text-gray-100">
+          Zwitter
+        </span>
       </div>
 
       {/* Notification Icon */}
@@ -46,10 +55,15 @@ const  MobileTop:React.FC=()=> {
         <FiBell size={22} />
       </button>
 
-      {/* Sidebar Overlay */}
+      
+      
+    </div>
+    {/* Sidebar Overlay */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-30 transition-opacity duration-300 ${
-          sidebarOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        className={`fixed inset-0 bg-black transition-opacity duration-300 ${
+          sidebarOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
       ></div>
 
@@ -70,8 +84,12 @@ const  MobileTop:React.FC=()=> {
               className="w-12 h-12 rounded-full"
             />
             <div>
-              <p className="font-semibold text-lg text-gray-900 dark:text-white">Hermain Irfan</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">@hermain</p>
+              <p className="font-semibold text-lg text-gray-900 dark:text-white">
+                Hermain Irfan
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                @hermain
+              </p>
             </div>
           </div>
 
@@ -108,8 +126,8 @@ const  MobileTop:React.FC=()=> {
           </div>
         </div>
       </div>
-    </div>
+      </>
   );
-}
+};
 
 export default MobileTop;

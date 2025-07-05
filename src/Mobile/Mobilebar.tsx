@@ -17,6 +17,7 @@ const Mobilebar: React.FC = () => {
         
     
         <nav className={`fixed bottom-0 left-0 right-0 bg-background border-t border-gray-600 flex justify-around items-center h-14 z-50 md:hidden
+            transform transition-transform duration-300 ease-in-out
             ${scrollDirection ==="down" ? "translate-y-full":"translate-y-0"}`}>
             {navItems.map((item, idx) => (
                 <button
