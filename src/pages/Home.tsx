@@ -7,7 +7,7 @@ import RightSidebar from "@/components/Sidebar/RightSidebar";
 import { TweetCard } from "@/TweetCard/TweetCard";
 import type { Tweet } from "@/data/types";
 import { mockTweets } from "@/data/mock-tweet";
-import Mobilebar from "@/components/Sidebar/Mobilebar";
+import Mobilebar from "@/Mobile/Mobilebar";
 
 function Home() {
   const [tweets, setTweets] = useState<Tweet[]>([]);
