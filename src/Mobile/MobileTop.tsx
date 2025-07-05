@@ -33,31 +33,34 @@ const MobileTop: React.FC = () => {
   return (
     <>
     <div
-      className={`fixed top-0 left-0 right-0 bg-background border-b border-gray-600 flex justify-around items-center h-14 z-50 md:hidden
+  className={`fixed top-0 left-0 right-0 bg-background border-b border-gray-600 h-14 z-50 md:hidden
     transform transition-transform duration-300 ease-in-out
     ${scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"}`}
-    >
-      {/* Profile + Brand */}
-      <div className="flex items-center space-x-5">
-        <img
-          src="https://randomuser.me/api/portraits/lego/1.jpg"
-          alt="Profile"
-          className="w-10 h-10 rounded-full cursor-pointer"
-          onClick={() => setSidebarOpen(true)}
-        />
-        <span className="font-bold text-lg text-gray-800 dark:text-gray-100">
-          Zwitter
-        </span>
-      </div>
+>
+  <div className="relative h-full flex items-center justify-center">
 
-      {/* Notification Icon */}
-      <button className="text-gray-600 dark:text-gray-300 hover:text-blue-500 focus:outline-none">
-        <FiBell size={22} />
-      </button>
-
-      
-      
+    {/* Profile Icon - Left */}
+    <div className="absolute left-4">
+      <img
+        src="https://randomuser.me/api/portraits/lego/1.jpg"
+        alt="Profile"
+        className="w-10 h-10 rounded-full cursor-pointer"
+        onClick={() => setSidebarOpen(true)}
+      />
     </div>
+
+    {/* Brand - Center */}
+    <span className="font-bold text-lg text-gray-800 dark:text-gray-100">
+      Zwitter
+    </span>
+
+    {/* Notification Icon - Right */}
+    <button className="absolute right-4 text-gray-600 dark:text-gray-300 hover:text-blue-500 focus:outline-none">
+      <FiBell size={22} />
+    </button>
+
+  </div>
+</div>
     {/* Sidebar Overlay */}
       <div
         className={`fixed inset-0 bg-black transition-opacity duration-300 ${
